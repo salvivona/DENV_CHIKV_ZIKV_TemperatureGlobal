@@ -53,7 +53,9 @@ R0= np.zeros((sample_len[0],sample_len[1]))
 for i in range(0,sample_len[0]):
 	R0[i,:]=mua.myR0(np.squeeze(np.asarray(a[i,:])), np.squeeze(np.asarray(b[i,:])), np.squeeze(np.asarray(c[i,:])), np.squeeze(np.asarray(PDR[i,:])), np.squeeze(np.asarray(MDR[i,:])), np.squeeze(np.asarray(EFD[i,:])), np.squeeze(np.asarray(pEA[i,:])), np.squeeze(np.asarray(lf[i,:])))
 	
+np.savetxt('R0_Aegypti_DENV.csv', R0, delimiter=',')
 
+'''
 Temps= np.arange(0,50,0.1)
 R0_mean = np.mean(R0, axis=1)
 print(Temps.shape)
@@ -62,5 +64,5 @@ R0_mean_temp= np.stack((Temps,R0_mean), axis=-1)
 print(R0_mean_temp.shape)
 plt.plot(R0_mean_temp[:,0], R0_mean_temp[:,1])
 R0_mean_temp.tolist()
-print(R0_mean_temp)
-plt.show()
+
+plt.show()'''
