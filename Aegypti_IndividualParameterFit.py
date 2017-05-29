@@ -95,20 +95,23 @@ thin_factor=5
 
 #PLOTTING THE HISTOGRAM
 
-figure_count= mua.create_2x2_histograms(trace, figure_count)
+#figure_count= mua.create_2x2_histograms(trace, figure_count)
 
 
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
 a_samps= mua.make_sims_temp_resp("briere",trace, Temps, thin_factor )
 
+samps={}
+samps['GCR']=a_samps
+samps['T']=Temps
 
 q= mua.temp_sim_quants(a_samps,Temps)
 
 
 #PLOTTING THE DATA
 
-figure_count= mua.add_sim_lines(Temps, a_samps, q,Y , T, figure_count)
+#figure_count= mua.add_sim_lines(Temps, a_samps, q,Y , T, figure_count)
 
 
 
@@ -177,12 +180,13 @@ thin_factor=5
 
 #PLOTTING THE HISTOGRAM
 
-figure_count= mua.create_2x2_histograms(trace, figure_count)
+#figure_count= mua.create_2x2_histograms(trace, figure_count)
 
 
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
 EFD_samps= mua.make_sims_temp_resp("briere",trace, Temps, thin_factor )
+samps['EFD']=EFD_samps
 
 
 q= mua.temp_sim_quants(EFD_samps,Temps)
@@ -190,7 +194,7 @@ q= mua.temp_sim_quants(EFD_samps,Temps)
 
 #PLOTTING THE DATA
 
-figure_count= mua.add_sim_lines(Temps, EFD_samps, q,Y , T, figure_count)
+#figure_count= mua.add_sim_lines(Temps, EFD_samps, q,Y , T, figure_count)
 
 
 q= mua.temp_sim_quants(EFD_samps,Temps)
@@ -198,12 +202,10 @@ q= mua.temp_sim_quants(EFD_samps,Temps)
 
 #PLOTTING THE DATA
 
-figure_count= mua.add_sim_lines(Temps, EFD_samps, q,Y , T, figure_count)
+#figure_count= mua.add_sim_lines(Temps, EFD_samps, q,Y , T, figure_count)
 
 
 
-'''
-'''
 #CHECK COUNT:*
 #############################################
 ################# b #######################
@@ -255,12 +257,13 @@ thin_factor=5
 
 #PLOTTING THE HISTOGRAM
 
-figure_count= mua.create_2x2_histograms(trace, figure_count)
+#figure_count= mua.create_2x2_histograms(trace, figure_count)
 
 
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
 b_samps= mua.make_sims_temp_resp("briere_trunc",trace, Temps, thin_factor )
+samps['b']=b_samps
 
 #calculate the quants
 q= mua.temp_sim_quants(b_samps,Temps)
@@ -268,11 +271,9 @@ q= mua.temp_sim_quants(b_samps,Temps)
 
 #PLOTTING THE DATA
 
-figure_count= mua.add_sim_lines(Temps, b_samps, q,Y , T, figure_count)
+#figure_count= mua.add_sim_lines(Temps, b_samps, q,Y , T, figure_count)
 
 
-'''
-'''
 
 #CHECK COUNT:*
 #############################################
@@ -328,12 +329,15 @@ thin_factor=5
 
 #PLOTTING THE HISTOGRAM
 
-figure_count= mua.create_2x2_histograms(trace, figure_count)
+#figure_count= mua.create_2x2_histograms(trace, figure_count)
 
 
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
 c_samps= mua.make_sims_temp_resp("briere_trunc",trace, Temps, thin_factor )
+samps['c']=c_samps
+
+
 
 #calculate the quants
 q= mua.temp_sim_quants(c_samps,Temps)
@@ -341,11 +345,8 @@ q= mua.temp_sim_quants(c_samps,Temps)
 
 #PLOTTING THE DATA
 
-figure_count= mua.add_sim_lines(Temps, c_samps, q,Y , T, figure_count)
+#figure_count= mua.add_sim_lines(Temps, c_samps, q,Y , T, figure_count)
 
-
-'''
-'''
 
 
 #CHECK COUNT:*
@@ -414,12 +415,13 @@ thin_factor=5
 
 #PLOTTING THE HISTOGRAM
 
-figure_count= mua.create_2x2_histograms(trace, figure_count)
+#figure_count= mua.create_2x2_histograms(trace, figure_count)
 
 
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
 MDR_samps= mua.make_sims_temp_resp("briere",trace, Temps, thin_factor )
+samps['MDR']=MDR_samps
 
 
 q= mua.temp_sim_quants(MDR_samps,Temps)
@@ -427,19 +429,7 @@ q= mua.temp_sim_quants(MDR_samps,Temps)
 
 #PLOTTING THE DATA
 
-figure_count= mua.add_sim_lines(Temps, MDR_samps, q,Y , T, figure_count)
-
-#FIND THE QUANTILES
-q= mua.temp_sim_quants(MDR_samps,Temps)
-
-
-#PLOTTING THE DATA
-
-figure_count= mua.add_sim_lines(Temps, MDR_samps, q,Y , T, figure_count)
-
-
-'''
-'''
+#figure_count= mua.add_sim_lines(Temps, MDR_samps, q,Y , T, figure_count)
 
 #CHECK COUNT:*
 #############################################
@@ -507,7 +497,7 @@ thin_factor=5
 
 #PLOTTING THE HISTOGRAM
 
-figure_count= mua.create_2x2_histograms(trace, figure_count)
+#figure_count= mua.create_2x2_histograms(trace, figure_count)
 
 
 #Create the Brier Function
@@ -516,14 +506,13 @@ pEA_samps= mua.make_sims_temp_resp("quad_trunc",trace, Temps, thin_factor )
 
 #FIND THE QUANTILES
 q= mua.temp_sim_quants(pEA_samps,Temps)
+samps['pEA']=pEA_samps
 
 
 #PLOTTING THE DATA
 
-figure_count= mua.add_sim_lines(Temps, pEA_samps, q,Y , T, figure_count)
+#figure_count= mua.add_sim_lines(Temps, pEA_samps, q,Y , T, figure_count)
 
-
-'''
 
 
 #CHECK COUNT:*
@@ -612,7 +601,7 @@ thin_factor=5
 
 #PLOTTING THE HISTOGRAM
 
-figure_count= mua.create_2x2_histograms(trace, figure_count)
+#figure_count= mua.create_2x2_histograms(trace, figure_count)
 
 
 #Create the Brier Function
@@ -622,10 +611,19 @@ PDR_samps= mua.make_sims_temp_resp("briere",trace, Temps, thin_factor )
 
 #FIND THE QUANTILES
 q= mua.temp_sim_quants(PDR_samps,Temps)
+samps['PDR']=PDR_samps
 
 
 #PLOTTING THE DATA
 
-figure_count= mua.add_sim_lines(Temps, PDR_samps, q,Y , T, figure_count)
+#figure_count= mua.add_sim_lines(Temps, PDR_samps, q,Y , T, figure_count)
 
 
+import pickle
+
+
+
+
+aeg_samps= samps
+with open('Aegypti_IPFC_samps.pickle', 'wb') as handle:
+    pickle.dump(aeg_samps, handle, protocol=pickle.HIGHEST_PROTOCOL)

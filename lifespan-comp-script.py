@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 figure_count= 0 
 
 
-'''
+
 #############################################
 ################# lifespan of Aegypti #######################
 #############################################
@@ -104,6 +104,8 @@ figure_count= mua.create_2x2_histograms(trace, figure_count)
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
 lf_Aeg_samps= mua.make_sims_temp_resp("quad",trace, Temps, thin_factor )
+samps={}
+samps['lf_Aeg']=lf_Aeg_samps
 
 #FIND THE QUANTILES
 q= mua.temp_sim_quants(lf_Aeg_samps,Temps)
@@ -112,7 +114,7 @@ q= mua.temp_sim_quants(lf_Aeg_samps,Temps)
 #PLOTTING THE DATA
 
 figure_count= mua.add_sim_lines(Temps, lf_Aeg_samps, q,Y , T, figure_count)
-'''
+
 
 #############################################
 ################# lifespan of Alb #######################
@@ -203,6 +205,8 @@ figure_count= mua.create_2x2_histograms(trace, figure_count)
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
 lf_Alb_samps= mua.make_sims_temp_resp("quad",trace, Temps, thin_factor )
+samps['lf_Alb']=lf_Alb_samps
+
 
 #FIND THE QUANTILES
 q= mua.temp_sim_quants(lf_Alb_samps,Temps)
@@ -213,4 +217,6 @@ q= mua.temp_sim_quants(lf_Alb_samps,Temps)
 figure_count= mua.add_sim_lines(Temps, lf_Alb_samps, q,Y , T, figure_count)
 
 
-
+import pickle
+with open('lifespan_samps_AEG_ALB.pickle', 'wb') as handle:
+    pickle.dump(samps, handle, protocol=pickle.HIGHEST_PROTOCOL)

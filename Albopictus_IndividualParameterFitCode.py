@@ -24,7 +24,7 @@ data_all= pd.read_csv('albopictusCHIKVmodelTempData_2016-03-26.csv')
 
 sample_size= 5000
 
-'''
+
 #############################################
 ################# GCD #######################
 #############################################
@@ -98,6 +98,9 @@ figure_count= mua.create_2x2_histograms(trace, figure_count)
 Temps= np.arange(0,50,0.1)
 a_samps= mua.make_sims_temp_resp("briere",trace, Temps, thin_factor )
 
+samps={}
+samps['GCD']=a_samps
+samsp['T']=Temps
 
 q= mua.temp_sim_quants(a_samps,Temps)
 
@@ -105,8 +108,6 @@ q= mua.temp_sim_quants(a_samps,Temps)
 #PLOTTING THE DATA
 
 figure_count= mua.add_sim_lines(Temps, a_samps, q,Y , T, figure_count)
-'''
-'''
 
 
 #############################################
@@ -197,7 +198,7 @@ figure_count= mua.create_2x2_histograms(trace, figure_count)
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
 MDR_samps= mua.make_sims_temp_resp("briere",trace, Temps, thin_factor )
-
+samps['MDR']=MDR_samps
 
 q= mua.temp_sim_quants(MDR_samps,Temps)
 
@@ -214,10 +215,6 @@ q= mua.temp_sim_quants(MDR_samps,Temps)
 
 figure_count= mua.add_sim_lines(Temps, MDR_samps, q,Y , T, figure_count)
 
-
-'''
-
-'''
 
 ############################################
 ################# TFD #######################
@@ -291,7 +288,7 @@ figure_count= mua.create_2x2_histograms(trace, figure_count)
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
 TFD_samps= mua.make_sims_temp_resp("briere",trace, Temps, thin_factor )
-
+samps['TFD']=TFD_samps
 
 q= mua.temp_sim_quants(TFD_samps,Temps)
 
@@ -299,9 +296,6 @@ q= mua.temp_sim_quants(TFD_samps,Temps)
 #PLOTTING THE DATA
 
 figure_count= mua.add_sim_lines(Temps, TFD_samps, q,Y , T, figure_count)
-'''
-
-'''
 
 #CHECK COUNT:*
 #############################################
@@ -372,18 +366,18 @@ thin_factor=5
 figure_count= mua.create_2x2_histograms(trace, figure_count)
 
 
+
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
-pEA_samps= mua.make_sims_temp_resp("quad_trunc",trace, Temps, thin_factor )
+pEA_samps= mua.make_sims_temp_resp("quad_trunc",trace, Temps, thin_factor)
+
+samps['pEA']=pEA_samps
 
 #FIND THE QUANTILES
 q= mua.temp_sim_quants(pEA_samps,Temps)
 
-
 #PLOTTING THE DATA
-
 figure_count= mua.add_sim_lines(Temps, pEA_samps, q,Y , T, figure_count)
-
 
 
 '''
@@ -445,7 +439,7 @@ figure_count= mua.create_2x2_histograms(trace, figure_count)
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
 b_samps= mua.make_sims_temp_resp("briere",trace, Temps, thin_factor )
-
+samps['b']=b_samps
 #calculate the quants
 q= mua.temp_sim_quants(b_samps,Temps)
 
@@ -456,7 +450,9 @@ figure_count= mua.add_sim_lines(Temps, b_samps, q,Y , T, figure_count)
 
 
 
-'''
+
+
+
 
 #CHECK COUNT:*
 #############################################
@@ -516,7 +512,7 @@ figure_count= mua.create_2x2_histograms(trace, figure_count)
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
 c_samps= mua.make_sims_temp_resp("briere_trunc",trace, Temps, thin_factor )
-
+samps['c']=c_samps
 #calculate the quants
 q= mua.temp_sim_quants(c_samps,Temps)
 
@@ -599,7 +595,7 @@ figure_count= mua.create_2x2_histograms(trace, figure_count)
 #Create the Brier Function
 Temps= np.arange(0,50,0.1)
 PDR_samps= mua.make_sims_temp_resp("briere",trace, Temps, thin_factor )
-
+samps['PDR']=PDR_samps
 
 #FIND THE QUANTILES
 q= mua.temp_sim_quants(PDR_samps,Temps)
@@ -611,4 +607,8 @@ figure_count= mua.add_sim_lines(Temps, PDR_samps, q,Y , T, figure_count)
 
 
 
+import pickle
 
+alb_samps= samps
+with open('Albopictus_IPFC_samps.pickle', 'wb') as handle:
+    pickle.dump(alb_samps, handle, protocol=pickle.HIGHEST_PROTOCOL)

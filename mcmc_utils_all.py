@@ -410,29 +410,6 @@ def gamma_fit(data, plot_boolean):
     return np.array([param[0],param[2]]) #only export the scale and shape, not loc
 
 
-'''
-def create_2x2_histograms(data, figure_count):
-
-  figure_count= figure_count+1
-  plt.figure(figure_count)
-
-  f, axarr = plt.subplots(2, 2)
-  axarr[0, 0].hist(data['T0'][:], 50, normed=1, facecolor='g', alpha=0.75)
-  axarr[0, 0].set_title('T0')
-  axarr[0, 1].hist(data['Tm'][:], 50, normed=1, facecolor='g', alpha=0.75)
-  axarr[0, 1].set_title('Tm')
-  axarr[1, 0].hist(data['c'][:], 50, normed=1, facecolor='g', alpha=0.75)
-  axarr[1, 0].set_title('c')
-  axarr[1, 1].hist(data['tau'][:], 50, normed=1, facecolor='g', alpha=0.75)
-
-
-  axarr[1, 1].set_title('tau')
-
-  plt.show()
-
-  return figure_count
-'''
-
 
 def create_2x2_histograms(data, figure_count):
 
@@ -458,6 +435,10 @@ def create_2x2_histograms(data, figure_count):
 
 
 
+def myR0(a, b, c, PDR, MDR, EFD, pEA, lf): 
+  ec= 0.00001
+  mu= 1./(lf+ec)
+  return np.asmatrix(np.sqrt(((a*a*b*c*(EFD*pEA*MDR/(mu*mu))*np.exp((-mu/(PDR+ec))))/(mu))))
 
 
 
